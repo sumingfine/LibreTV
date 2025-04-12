@@ -154,7 +154,7 @@ docker run -d --name libretv -p 8899:80 bestzwei/libretv:latest
 - `API_SITES`: 添加或修改默认视频源。
 - `SITE_CONFIG`: 更改站点名称、描述等。
 - `PLAYER_CONFIG`: 调整播放器默认参数。
-后端代理配置 (环境变量): 在部署平台的设置界面修改 CACHE_TTL, DEBUG, MAX_RECURSION, USER_AGENTS_JSON 等环境变量。
+- `后端代理配置 (环境变量)`: 在部署平台的设置界面修改 CACHE_TTL, DEBUG, MAX_RECURSION, USER_AGENTS_JSON 等环境变量。
 
 ## 🌟 项目结构 (适配多平台)
 
