@@ -1,6 +1,13 @@
+// js/config.js
+
 // 全局常量配置
 
-const PROXY_URL = '/proxy/'; // 使用相对路径指向内部代理功能
+// 默认代理路径 (适用于 Cloudflare Pages 和 Netlify with rewrite)
+const PROXY_URL = '/proxy/';
+
+// **部署到 Vercel 时，请取消注释下面这行，并注释掉上面那行**
+// const PROXY_URL = '/api/proxy/';
+
 const HOPLAYER_URL = 'https://hoplayer.com/index.html';
 const SEARCH_HISTORY_KEY = 'videoSearchHistory';
 const MAX_HISTORY_ITEMS = 5;
@@ -131,7 +138,7 @@ const SECURITY_CONFIG = {
 const CUSTOM_API_CONFIG = {
     separator: ',',           // 分隔符
     maxSources: 5,            // 最大允许的自定义源数量
-    testTimeout: 5000,        // 测试超时时间(毫秒) - 用于 app.js 的 testCustomApiUrl
+    testTimeout: 5000,        // 测试超时时间(毫秒) - 用于 app.js 的 testSiteAvailability
     namePrefix: '自定义-',    // 自定义源名称前缀 (修改为中文)
     validateUrl: true,        // 验证URL格式 (app.js 中使用)
     cacheResults: true,       // 缓存测试结果 (app.js 中使用 localStorage)
@@ -140,5 +147,5 @@ const CUSTOM_API_CONFIG = {
 
 
 // --- 内部代理功能配置已移除 ---
-// 代理功能的配置现在通过 Cloudflare Pages 的环境变量设置
+// 代理功能的配置现在通过 Cloudflare Pages / Vercel / Netlify 的环境变量设置
 // --- 内部代理功能配置结束 ---
