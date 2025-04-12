@@ -553,23 +553,43 @@ async function handleMultipleCustomSearch(searchQuery, customApiUrls) {
 // 拦截API请求
 (function() {
     const originalFetch = window.fetch;
-    
+
     window.fetch = async function(input, init) {
-        const requestUrl = typeof input === 'string' ? new URL(input, window.location.origin) : input.url;
-        
-        if (requestUrl.pathname.startsWith('/api/')) {
+        // 解析请求 URL
+        const requestUrl = (typeof input === 'string' || input instanceof URL)
+            ? new URL(input, window.location.origin)
+            : input.url; // input 可能是一个 Request 对象
+
+        // **关键修改：检查请求路径**
+        // 1. 只拦截指向 /api/search 或 /api/detail 的请求
+        // 2. 明确排除指向代理路径 (PROXY_URL) 的请求
+        const isApiSearch = requestUrl.pathname === '/api/search';
+        const isApiDetail = requestUrl.pathname === '/api/detail';
+        // 假设 PROXY_URL 在 config.js 中定义并且可以在这里访问到
+        // PROXY_URL 对于 Vercel 应该是 '/api/proxy/'
+        const isProxyRequest = requestUrl.pathname.startsWith(PROXY_URL);
+
+        if ((isApiSearch || isApiDetail) && !isProxyRequest) {
+            // 这是我们想要拦截并由 handleApiRequest 处理的初始 API 请求
+            console.log('Intercepting API request:', requestUrl.pathname);
             try {
+                // 调用 handleApiRequest 处理 (这个函数内部会再次 fetch 代理 URL)
                 const data = await handleApiRequest(requestUrl);
                 return new Response(data, {
                     headers: {
                         'Content-Type': 'application/json',
-                        'Access-Control-Allow-Origin': '*',
+                        'Access-Control-Allow-Origin': '*', // 虽然是前端模拟，也加一下
                     },
                 });
             } catch (error) {
+                // handleApiRequest 内部应该已经处理了错误并返回 JSON 字符串
+                // 这里保险起见再加一层
+                console.error('Error in handleApiRequest:', error);
                 return new Response(JSON.stringify({
                     code: 500,
-                    msg: '服务器内部错误',
+                    msg: '前端API处理时发生内部错误: ' + error.message,
+                    list: [],
+                    episodes: [],
                 }), {
                     status: 500,
                     headers: {
@@ -577,10 +597,11 @@ async function handleMultipleCustomSearch(searchQuery, customApiUrls) {
                     },
                 });
             }
+        } else {
+            // 对于非特定 API 请求，或者是指向代理的请求，使用原始 fetch
+            // console.log('Bypassing interceptor for:', requestUrl.pathname);
+            return originalFetch.apply(this, arguments);
         }
-        
-        // 非API请求使用原始fetch
-        return originalFetch.apply(this, arguments);
     };
 })();
 
