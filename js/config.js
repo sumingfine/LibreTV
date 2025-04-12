@@ -15,7 +15,7 @@ const MAX_HISTORY_ITEMS = 5;
 // 网站信息配置
 const SITE_CONFIG = {
     name: 'LibreTV',
-    url: 'https://libretv.is-an.org', // 您可以改成您的实际部署地址
+    url: 'https://www.sumingys.top', // 您可以改成您的实际部署地址
     description: '免费在线视频搜索与观看平台',
     logo: 'https://images.icon-icons.com/38/PNG/512/retrotv_5520.png',
     version: '1.0.1' // 版本号更新
@@ -67,6 +67,14 @@ const API_SITES = {
         api: 'https://dbzy.com',
         name: '豆瓣资源',
         // detail: 'https://dbzy.com'
+    },
+    hhzy: {
+        api: 'https://www.haohuazy.com',
+        name: '豪华资源',
+    },
+    fqzy: {
+        api: 'https://fqzy2.me',
+        name: '番茄9kg资源',
     }
     // 您可以按需添加更多源
 };
