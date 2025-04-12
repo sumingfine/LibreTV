@@ -205,7 +205,9 @@ LibreTV/
 
 ## Star History
 ![alt text](https://api.star-history.com/svg?repos=bestZwei/LibreTV&type=Date)
-⚠️ 免责声明
+
+## ⚠️ 免责声明
+
 LibreTV 仅作为视频搜索工具，不存储、上传或分发任何视频内容。所有视频均来自第三方 API 接口提供的公开搜索结果。内部代理仅用于解决浏览器跨域限制和处理 M3U8 格式，不修改视频内容本身。如有侵权内容，请联系相应的内容提供方处理。使用本工具产生的任何法律后果由使用者自行承担。
 
 ## 🔄 更新日志
