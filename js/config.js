@@ -80,7 +80,7 @@ const API_SITES = {
     mzwzy: {
         api: 'https://mzzy.me',
         name: '魔爪蛙资源',
-        detail: 'https://fqzy2.me' // 详情页基础 URL
+        //detail: 'https://fqzy2.me' // 详情页基础 URL
     },
     // 您可以按需添加更多源
 };
